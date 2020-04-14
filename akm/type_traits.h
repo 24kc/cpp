@@ -23,6 +23,17 @@ struct is_same : false_type {};
 
 template<class T>
 struct is_same<T, T> : true_type {};
+/*
+template<class T, class U>
+inline constexpr bool is_same_v = is_same<T, U>::value;
+*/
+
+template<class T> struct remove_reference { using type = T; };
+template<class T> struct remove_reference<T&> { using type = T; };
+template<class T> struct remove_reference<T&&> { using type = T; };
+
+template<class T>
+using remove_reference_t = typename remove_reference<T>::type;
 
 /*
 template<class T, class U>
