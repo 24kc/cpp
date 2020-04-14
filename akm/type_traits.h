@@ -12,8 +12,11 @@ struct integral_constant {
 	constexpr value_type operator()() const noexcept { return value; }
 };
 
-using true_type = integral_constant<bool, true>;
-using false_type = integral_constant<bool, false>;
+template<bool B>
+using bool_constant = integral_constant<bool, B>;
+
+using true_type = bool_constant<true>;
+using false_type = bool_constant<false>;
 
 template<class T, class U>
 struct is_same : false_type {};
